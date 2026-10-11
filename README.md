@@ -77,6 +77,7 @@ lib/
 ├── pages/                 # 页面：浏览、确认删除、按月、设置、关于
 └── widgets/               # 组件：滑动卡片、视频播放、实况照片等
 assets/icon/               # 应用图标及生成脚本
+website/                   # 官网（PHP），见 website/README.md
 ```
 
 应用图标由 `assets/icon/generate_icon.swift` 绘制，改完后执行下面的命令重新生成各尺寸图标：

@@ -1,0 +1,26 @@
+# Apache 配置（Nginx 见 README.md）
+Options -Indexes
+DirectoryIndex index.php
+ErrorDocument 404 /404.php
+
+# includes 和 tools 目录不对外开放
+RedirectMatch 404 ^/(includes|tools)/
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# 静态资源带版本号，可以长期缓存
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
