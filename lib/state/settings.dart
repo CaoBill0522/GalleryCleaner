@@ -38,6 +38,7 @@ class AppSettings extends ChangeNotifier {
   static final AppSettings instance = AppSettings._();
 
   static const _kSort = 'settings_sort';
+  static const _kOnboarding = 'onboarding_done';
   static const _kFilter = 'settings_filter';
   static const _kHaptics = 'settings_haptics';
   static const _kInfo = 'settings_info';
@@ -51,6 +52,9 @@ class AppSettings extends ChangeNotifier {
   SortOrder sortOrder = SortOrder.newestFirst;
   MediaFilter mediaFilter = MediaFilter.all;
   bool haptics = true;
+
+  /// 是否已经看过首次启动的功能向导。
+  bool onboardingDone = false;
   bool showInfo = true;
   bool confirmBeforeDelete = true;
   LivePlayMode livePlayMode = LivePlayMode.longPress;
@@ -65,6 +69,7 @@ class AppSettings extends ChangeNotifier {
     mediaFilter =
         MediaFilter.values[(_prefs.getInt(_kFilter) ?? 0).clamp(0, 2)];
     haptics = _prefs.getBool(_kHaptics) ?? true;
+    onboardingDone = _prefs.getBool(_kOnboarding) ?? false;
     showInfo = _prefs.getBool(_kInfo) ?? true;
     confirmBeforeDelete = _prefs.getBool(_kConfirm) ?? true;
     livePlayMode =
@@ -86,6 +91,11 @@ class AppSettings extends ChangeNotifier {
     mediaFilter = v;
     _prefs.setInt(_kFilter, v.index);
     notifyListeners();
+  }
+
+  void setOnboardingDone() {
+    onboardingDone = true;
+    _prefs.setBool(_kOnboarding, true);
   }
 
   void setHaptics(bool v) {

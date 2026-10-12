@@ -9,6 +9,7 @@ import '../state/settings.dart';
 import '../theme.dart';
 import '../widgets/ui.dart';
 import 'about_pages.dart';
+import 'onboarding_page.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -280,6 +281,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 icon: Icons.description_outlined,
                 title: '用户协议',
                 onTap: () => _push(const LegalPage.terms()),
+              ),
+              _Tile(
+                icon: Icons.school_outlined,
+                title: '使用引导',
+                onTap: () => _push(const OnboardingPage(replay: true)),
               ),
               _Tile(
                 icon: Icons.favorite_border_rounded,

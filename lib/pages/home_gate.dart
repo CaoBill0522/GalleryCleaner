@@ -6,6 +6,8 @@ import '../services/media_service.dart';
 import '../state/cleaner_state.dart';
 import '../theme.dart';
 import '../widgets/ui.dart';
+import '../state/settings.dart';
+import 'onboarding_page.dart';
 import 'viewer_page.dart';
 
 /// 申请相册权限，通过后进入浏览页。
@@ -20,10 +22,18 @@ class _HomeGateState extends State<HomeGate> with WidgetsBindingObserver {
   PermissionState? _permission;
   bool _started = false;
 
+  /// 首次启动先看功能向导，看完再请求相册权限。
+  bool _onboarding = !AppSettings.instance.onboardingDone;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    if (!_onboarding) _request();
+  }
+
+  void _finishOnboarding() {
+    setState(() => _onboarding = false);
     _request();
   }
 
@@ -59,7 +69,12 @@ class _HomeGateState extends State<HomeGate> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final ps = _permission;
     final Widget child;
-    if (ps == null) {
+    if (_onboarding) {
+      child = OnboardingPage(
+        key: const ValueKey('onboarding'),
+        onDone: _finishOnboarding,
+      );
+    } else if (ps == null) {
       child = const Scaffold(
         key: ValueKey('loading'),
         body: Center(child: LogoLoader()),
