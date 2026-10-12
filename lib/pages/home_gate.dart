@@ -111,7 +111,7 @@ class _PermissionPage extends StatelessWidget {
               const LogoLoader(size: 108),
               const SizedBox(height: 28),
               const Text(
-                '相册清道夫',
+                '图库清道夫',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,

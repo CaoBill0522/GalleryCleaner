@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-const SITE_NAME = '相册清道夫';
+const SITE_NAME = '图库清道夫';
 const SITE_NAME_EN = 'Gallery Cleaner';
 const SITE_URL = 'https://gallerycleaner.oxoz.cn';
 const SITE_TAGLINE = '一张张过照片，上滑标记，确认后一次删干净。';
-const SITE_DESCRIPTION = '相册清道夫是一款免费、开源、完全离线的相册清理工具。左右滑动浏览，上滑标记，确认后批量删除，支持按月清理、视频和实况照片，适用于 iPhone 和 Android。';
+const SITE_DESCRIPTION = '图库清道夫是一款免费、开源、完全离线的相册清理工具。左右滑动浏览，上滑标记，确认后批量删除，支持按月清理、视频和实况照片，适用于 iPhone 和 Android。';
 
 const GITHUB_URL = 'https://github.com/CaoBill0522/GalleryCleaner';
 /** 指向最新 Release 里固定文件名的 APK，发新版时保持文件名不变即可。 */

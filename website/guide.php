@@ -3,7 +3,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $page_title = '使用指南';
-$page_description = '相册清道夫使用指南：授权、手势操作、标记与撤销、确认删除、找回误删、按月清理、视频与实况照片、设置说明。';
+$page_description = '图库清道夫使用指南：授权、手势操作、标记与撤销、确认删除、找回误删、按月清理、视频与实况照片、设置说明。';
 $page_scripts = ['assets/js/guide.js'];
 
 function shot(string $file, string $alt): string
@@ -27,7 +27,7 @@ require __DIR__ . '/includes/header.php';
 ?>
 <div class="container doc-hero">
   <h1>使用指南</h1>
-  <p>五分钟掌握相册清道夫。想先上手试试？去 <a href="demo.php">在线体验</a>。</p>
+  <p>五分钟掌握图库清道夫。想先上手试试？去 <a href="demo.php">在线体验</a>。</p>
 </div>
 
 <div class="container doc-layout">
@@ -48,10 +48,10 @@ require __DIR__ . '/includes/header.php';
           <p>第一次打开时，App 会请求访问相册。请选择 <strong>「允许完全访问」</strong>，这样才能浏览和清理全部照片。</p>
           <p>如果当时选了「选择照片」或「不允许」，可以到系统设置里修改：</p>
           <ul>
-            <li><strong>iPhone：</strong>设置 → App → 相册清道夫 → 照片 → 完全访问</li>
-            <li><strong>Android：</strong>设置 → 应用 → 相册清道夫 → 权限 → 照片和视频 → 始终允许全部</li>
+            <li><strong>iPhone：</strong>设置 → App → 图库清道夫 → 照片 → 完全访问</li>
+            <li><strong>Android：</strong>设置 → 应用 → 图库清道夫 → 权限 → 照片和视频 → 始终允许全部</li>
           </ul>
-          <div class="callout">相册清道夫只在手机本地读取相册，不联网、不上传。详见 <a href="privacy.php">隐私政策</a>。</div>
+          <div class="callout">图库清道夫只在手机本地读取相册，不联网、不上传。详见 <a href="privacy.php">隐私政策</a>。</div>
         </div>
       </div>
     </section>
@@ -116,7 +116,7 @@ require __DIR__ . '/includes/header.php';
       <h2><span class="n">5</span>找回误删</h2>
       <div class="guide-body no-shot">
         <div class="guide-text">
-          <p>相册清道夫不会直接抹掉照片，而是交给系统删除：</p>
+          <p>图库清道夫不会直接抹掉照片，而是交给系统删除：</p>
           <ul>
             <li><strong>iPhone：</strong>照片进入系统「照片」App 的 <strong>「最近删除」</strong>（在「相簿」的「实用工具」分组下），保留 30 天。打开后选中照片，点「恢复」即可。</li>
             <li><strong>Android 11 及以上：</strong>照片进入系统 <strong>回收站</strong>，一般保留 30 天。在系统相册或 Google 相册的「回收站」中恢复，不同品牌入口略有不同。</li>

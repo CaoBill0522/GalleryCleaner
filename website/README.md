@@ -1,4 +1,4 @@
-# 相册清道夫官网
+# 图库清道夫官网
 
 https://gallerycleaner.oxoz.cn 的源代码。纯 PHP，无数据库、无框架、无第三方依赖。
 

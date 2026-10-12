@@ -6,7 +6,7 @@ class AppLinks {
 }
 
 class AppInfo {
-  static const nameZh = '相册清道夫';
+  static const nameZh = '图库清道夫';
   static const nameEn = 'Gallery Cleaner';
   static const legalEffectiveDate = '2026 年 10 月 11 日';
 }

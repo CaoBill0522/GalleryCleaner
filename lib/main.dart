@@ -30,7 +30,7 @@ class GalleryCleanerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '相册清道夫',
+      title: '图库清道夫',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
       themeMode: ThemeMode.dark,

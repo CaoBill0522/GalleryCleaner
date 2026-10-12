@@ -1,5 +1,5 @@
 name: gallery_cleaner
-description: "相册清道夫 Gallery Cleaner：逐张浏览、滑动标记、确认后批量删除的相册清理工具。"
+description: "图库清道夫 Gallery Cleaner：逐张浏览、滑动标记、确认后批量删除的相册清理工具。"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

@@ -10,7 +10,7 @@ require_once __DIR__ . '/config.php';
 $sim_controls = $sim_controls ?? true;
 ?>
 <div class="sim-wrap">
-  <div class="phone" aria-label="相册清道夫在线体验">
+  <div class="phone" aria-label="图库清道夫在线体验">
     <div class="phone-screen sim" data-photos="<?= e(demo_photos_json()) ?>" tabindex="0">
       <div class="sim-island" aria-hidden="true"></div>
       <noscript><p class="sim-noscript">在线体验需要开启 JavaScript。</p></noscript>

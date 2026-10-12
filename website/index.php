@@ -30,7 +30,7 @@ $shots = [
 
 $faqs = [
     ['删除后还能找回吗？', 'iPhone 上删除的照片会进入系统相册的「最近删除」，30 天内可以恢复；Android 11 及以上会进入系统回收站。Android 10 及以下系统没有回收站，删除后无法恢复，请在确认页仔细核对。'],
-    ['会上传我的照片吗？', '不会。相册清道夫没有任何联网功能，不包含统计、广告或第三方 SDK，所有操作都在手机本地完成。代码完全开源，可以在 GitHub 上查看。'],
+    ['会上传我的照片吗？', '不会。图库清道夫没有任何联网功能，不包含统计、广告或第三方 SDK，所有操作都在手机本地完成。代码完全开源，可以在 GitHub 上查看。'],
     ['标记了但还没删除，退出 App 会丢吗？', '不会。标记和每个相册的浏览进度都保存在手机上，下次打开可以接着清理。'],
     ['为什么删除后手机空间没有变大？', '照片在「最近删除」或回收站里时仍然占用空间。在系统相册里清空「最近删除」或回收站后，空间才会真正释放。'],
     ['收费吗？', '完全免费，没有内购，也没有广告。'],
@@ -42,7 +42,7 @@ require __DIR__ . '/includes/header.php';
 <section class="hero">
   <div class="container hero-inner">
     <div>
-      <img class="hero-logo" src="<?= e(asset('assets/img/icon-192.png')) ?>" alt="相册清道夫图标" width="84" height="84">
+      <img class="hero-logo" src="<?= e(asset('assets/img/icon-192.png')) ?>" alt="图库清道夫图标" width="84" height="84">
       <h1><?= e(SITE_NAME) ?><span><?= e(SITE_NAME_EN) ?></span></h1>
       <p class="hero-lead"><?= e(SITE_TAGLINE) ?><br>删错了也能在「最近删除」里找回。</p>
       <div class="hero-actions"><?= download_buttons() ?></div>
@@ -64,7 +64,7 @@ require __DIR__ . '/includes/header.php';
   <div class="container center">
     <p class="eyebrow">三步清理</p>
     <h2 class="section-title">像刷卡片一样整理相册</h2>
-    <p class="section-lead">系统相册删照片又慢又容易删错。相册清道夫把清理拆成三步：看、标记、确认。</p>
+    <p class="section-lead">系统相册删照片又慢又容易删错。图库清道夫把清理拆成三步：看、标记、确认。</p>
   </div>
   <div class="container steps">
     <div class="step">
@@ -125,7 +125,7 @@ require __DIR__ . '/includes/header.php';
       <div class="big-icon"><?= svg_icon('lock') ?></div>
       <div>
         <h2>你的照片，只在你的手机上</h2>
-        <p>相册清道夫不联网、不上传、不收集任何数据，没有账号，也没有统计和广告。代码以 GPL-3.0 开源，任何人都可以检查。<a href="privacy.php">阅读隐私政策</a></p>
+        <p>图库清道夫不联网、不上传、不收集任何数据，没有账号，也没有统计和广告。代码以 GPL-3.0 开源，任何人都可以检查。<a href="privacy.php">阅读隐私政策</a></p>
       </div>
     </div>
   </div>

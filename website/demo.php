@@ -3,7 +3,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $page_title = '在线体验';
-$page_description = '在浏览器里体验相册清道夫：左右切换、上滑标记、确认后删除。使用演示照片，不会影响你的设备。';
+$page_description = '在浏览器里体验图库清道夫：左右切换、上滑标记、确认后删除。使用演示照片，不会影响你的设备。';
 $page_scripts = ['assets/js/sim.js'];
 
 require __DIR__ . '/includes/header.php';
