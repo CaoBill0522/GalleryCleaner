@@ -49,3 +49,6 @@ app.*.map.json
 
 # Claude Code 本地配置
 .claude/
+
+# 打包上传用的压缩包
+website/*.zip
