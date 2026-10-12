@@ -34,7 +34,7 @@ website/
 
 ## 常见修改
 
-- **App Store 上架后**：在 `includes/config.php` 填写 `IOS_DOWNLOAD_URL`，首页按钮会自动变成可点击。
+- **App Store**：`includes/config.php` 里的 `IOS_APP_ID`，下载按钮和 iPhone Safari 顶部的应用横幅都用它。
 - **Android 下载地址**：`ANDROID_DOWNLOAD_URL`，默认指向 GitHub Releases 的最新版本。
 - **版本号**：`APP_VERSION`。
 - **更换截图**：替换 `assets/img/screens/` 下同名的 jpg（宽 640px 即可）。

@@ -10,8 +10,10 @@ const SITE_DESCRIPTION = '图库清道夫是一款免费、开源、完全离线
 const GITHUB_URL = 'https://github.com/CaoBill0522/GalleryCleaner';
 /** 指向最新 Release 里固定文件名的 APK，发新版时保持文件名不变即可。 */
 const ANDROID_DOWNLOAD_URL = GITHUB_URL . '/releases/latest/download/GalleryCleaner-android.apk';
-/** App Store 上架后填入链接；为空时显示「即将上架」。 */
-const IOS_DOWNLOAD_URL = '';
+/** App Store 的 App ID；用于下载按钮和 Safari 顶部的智能应用横幅。留空则显示「即将上架」。 */
+const IOS_APP_ID = '6821847218';
+/** 不带地区的链接，Apple 会按访问者所在地区跳到对应商店。 */
+const IOS_DOWNLOAD_URL = IOS_APP_ID === '' ? '' : 'https://apps.apple.com/app/id' . IOS_APP_ID;
 
 const APP_VERSION = '1.0.0';
 const LEGAL_EFFECTIVE_DATE = '2026 年 10 月 11 日';

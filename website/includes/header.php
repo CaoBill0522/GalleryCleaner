@@ -21,6 +21,9 @@ $canonical = SITE_URL . '/' . (current_page() === 'index.php' ? '' : current_pag
   <title><?= e($full_title) ?></title>
   <meta name="description" content="<?= e($page_description) ?>">
   <meta name="theme-color" content="#0a0a0a">
+<?php if (IOS_APP_ID !== ''): ?>
+  <meta name="apple-itunes-app" content="app-id=<?= e(IOS_APP_ID) ?>">
+<?php endif; ?>
   <link rel="canonical" href="<?= e($canonical) ?>">
   <link rel="icon" type="image/png" sizes="32x32" href="<?= e(asset('assets/img/favicon-32.png')) ?>">
   <link rel="apple-touch-icon" href="<?= e(asset('assets/img/apple-touch-icon.png')) ?>">

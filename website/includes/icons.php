@@ -31,5 +31,5 @@ function download_buttons(): string
         : '<span class="btn btn-grey" aria-disabled="true">' . svg_icon('apple') . 'iPhone <small>即将上架</small></span>';
     $android = '<a class="btn btn-white" href="' . e(ANDROID_DOWNLOAD_URL) . '" target="_blank" rel="noopener">' . svg_icon('android') . 'Android 下载</a>';
     $github = '<a class="btn btn-grey" href="' . e(GITHUB_URL) . '" target="_blank" rel="noopener">' . svg_icon('github') . '源代码</a>';
-    return $android . $ios . $github;
+    return $ios . $android . $github;
 }

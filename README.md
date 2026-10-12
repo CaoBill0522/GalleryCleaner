@@ -6,12 +6,19 @@
 
 <p align="center">
   一张张过照片，上滑标记，确认后一次删干净。<br>
-  <a href="https://gallerycleaner.oxoz.cn">官网</a>
+  <a href="https://gallerycleaner.oxoz.cn">官网</a> ·
+  <a href="https://apps.apple.com/app/id6821847218">App Store</a> ·
+  <a href="https://github.com/CaoBill0522/GalleryCleaner/releases/latest">Android 下载</a>
 </p>
 
 ---
 
 手机相册里堆满了截图、连拍、重复照片，系统相册删起来又慢又容易删错。图库清道夫把清理变成「刷卡片」：左右切换，上滑标记，全部看完后在确认页统一核对，再一次性删除。
+
+## 下载
+
+- **iPhone / iPad**：[App Store](https://apps.apple.com/app/id6821847218)
+- **Android**：[下载最新版 APK](https://github.com/CaoBill0522/GalleryCleaner/releases/latest/download/GalleryCleaner-android.apk)（也可以在 [Releases](https://github.com/CaoBill0522/GalleryCleaner/releases) 页面选择其他版本）
 
 ## 功能
 
