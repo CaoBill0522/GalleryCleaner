@@ -62,14 +62,30 @@ class CleanerState extends ChangeNotifier {
     await reloadAlbums(preferredId: _store.albumId);
   }
 
+  /// 重新读取相册。相册在读取过程中被改动（例如 iCloud 正在同步）时
+  /// 可能失败，这时稍等重试一次；无论成败都不会让加载遮罩卡住。
   Future<void> reloadAlbums({String? preferredId, int? keepIndex}) async {
     loading = true;
     notifyListeners();
-    albums = await MediaService.loadAlbums(_settings, month: month);
-    final target =
-        albums.where((a) => a.id == preferredId).firstOrNull ??
-        albums.firstOrNull;
-    await _openAlbum(target, keepIndex: keepIndex);
+    for (var attempt = 0; ; attempt++) {
+      try {
+        albums = await MediaService.loadAlbums(_settings, month: month);
+        final target =
+            albums.where((a) => a.id == preferredId).firstOrNull ??
+            albums.firstOrNull;
+        await _openAlbum(target, keepIndex: keepIndex);
+        return;
+      } catch (e) {
+        if (attempt >= 1) {
+          debugPrint('reloadAlbums failed: $e');
+          loading = false;
+          generation++;
+          notifyListeners();
+          return;
+        }
+        await Future<void>.delayed(const Duration(milliseconds: 500));
+      }
+    }
   }
 
   Future<void> selectAlbum(AssetPathEntity a) async {
