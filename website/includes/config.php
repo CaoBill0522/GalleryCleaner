@@ -8,7 +8,8 @@ const SITE_TAGLINE = '一张张过照片，上滑标记，确认后一次删干�
 const SITE_DESCRIPTION = '相册清道夫是一款免费、开源、完全离线的相册清理工具。左右滑动浏览，上滑标记，确认后批量删除，支持按月清理、视频和实况照片，适用于 iPhone 和 Android。';
 
 const GITHUB_URL = 'https://github.com/CaoBill0522/GalleryCleaner';
-const ANDROID_DOWNLOAD_URL = GITHUB_URL . '/releases/latest';
+/** 指向最新 Release 里固定文件名的 APK，发新版时保持文件名不变即可。 */
+const ANDROID_DOWNLOAD_URL = GITHUB_URL . '/releases/latest/download/GalleryCleaner-android.apk';
 /** App Store 上架后填入链接；为空时显示「即将上架」。 */
 const IOS_DOWNLOAD_URL = '';
 
