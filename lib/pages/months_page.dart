@@ -115,38 +115,41 @@ class _MonthsPageState extends State<MonthsPage> {
                 style: TextStyle(color: AppColors.textSecondary),
               ),
             )
-          : CustomScrollView(
-              slivers: [
-                for (final y in years.where((y) => !_emptyYear(y))) ...[
-                  SliverToBoxAdapter(child: _yearHeader(y)),
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
-                    sliver: SliverGrid.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                            mainAxisSpacing: 8,
-                            crossAxisSpacing: 8,
-                            childAspectRatio: 0.82,
-                          ),
-                      itemCount: 12,
-                      itemBuilder: (context, i) {
-                        final m = YearMonth(y, i + 1);
-                        return _MonthCell(
-                          month: m,
-                          count: _inRange(m) ? _count(m) : 0,
-                          selected: m == current,
-                          cover: _inRange(m) && (_count(m) ?? 0) > 0
-                              ? _cover(m)
-                              : null,
-                          onTap: () => Navigator.of(context).pop(m),
-                        );
-                      },
+          : MaxWidth(
+              width: 900,
+              child: CustomScrollView(
+                slivers: [
+                  for (final y in years.where((y) => !_emptyYear(y))) ...[
+                    SliverToBoxAdapter(child: _yearHeader(y)),
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      sliver: SliverGrid.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 8,
+                              childAspectRatio: 0.82,
+                            ),
+                        itemCount: 12,
+                        itemBuilder: (context, i) {
+                          final m = YearMonth(y, i + 1);
+                          return _MonthCell(
+                            month: m,
+                            count: _inRange(m) ? _count(m) : 0,
+                            selected: m == current,
+                            cover: _inRange(m) && (_count(m) ?? 0) > 0
+                                ? _cover(m)
+                                : null,
+                            onTap: () => Navigator.of(context).pop(m),
+                          );
+                        },
+                      ),
                     ),
-                  ),
+                  ],
+                  const SliverToBoxAdapter(child: SizedBox(height: 32)),
                 ],
-                const SliverToBoxAdapter(child: SizedBox(height: 32)),
-              ],
+              ),
             ),
     );
   }

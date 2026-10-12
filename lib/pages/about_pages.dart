@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../config.dart';
 import '../theme.dart';
+import '../widgets/ui.dart';
 
 /// 隐私政策 / 用户协议。
 class LegalPage extends StatelessWidget {
@@ -16,34 +17,37 @@ class LegalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
-        children: [
-          const Text(
-            '生效日期：${AppInfo.legalEffectiveDate}',
-            style: TextStyle(color: AppColors.textTertiary, fontSize: 13),
-          ),
-          for (final (h, body) in sections) ...[
-            const SizedBox(height: 20),
-            Text(
-              h,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
+      body: MaxWidth(
+        width: 720,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
+          children: [
+            const Text(
+              '生效日期：${AppInfo.legalEffectiveDate}',
+              style: TextStyle(color: AppColors.textTertiary, fontSize: 13),
             ),
-            const SizedBox(height: 8),
-            Text(
-              body,
-              style: const TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 14,
-                height: 1.7,
+            for (final (h, body) in sections) ...[
+              const SizedBox(height: 20),
+              Text(
+                h,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
+              const SizedBox(height: 8),
+              Text(
+                body,
+                style: const TextStyle(
+                  color: AppColors.textSecondary,
+                  fontSize: 14,
+                  height: 1.7,
+                ),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
@@ -103,60 +107,63 @@ class AcknowledgementsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('鸣谢')),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
-        children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(4, 0, 4, 16),
-            child: Text(
-              '${AppInfo.nameZh}基于以下开源项目构建，感谢所有作者和贡献者。完整许可证文本见「设置 → 开源许可」。',
-              style: TextStyle(color: AppColors.textSecondary, height: 1.6),
-            ),
-          ),
-          for (final (name, desc, license) in _items)
-            Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          desc,
-                          style: const TextStyle(
-                            color: AppColors.textTertiary,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    license,
-                    style: const TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+      body: MaxWidth(
+        width: 720,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(4, 0, 4, 16),
+              child: Text(
+                '${AppInfo.nameZh}基于以下开源项目构建，感谢所有作者和贡献者。完整许可证文本见「设置 → 开源许可」。',
+                style: TextStyle(color: AppColors.textSecondary, height: 1.6),
               ),
             ),
-        ],
+            for (final (name, desc, license) in _items)
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            desc,
+                            style: const TextStyle(
+                              color: AppColors.textTertiary,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      license,
+                      style: const TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

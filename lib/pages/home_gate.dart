@@ -103,51 +103,60 @@ class _PermissionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28),
-          child: Column(
-            children: [
-              const Spacer(flex: 2),
-              const LogoLoader(size: 108),
-              const SizedBox(height: 28),
-              const Text(
-                '图库清道夫',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w800,
+        child: MaxWidth(
+          width: 520,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28),
+            child: Column(
+              children: [
+                const Spacer(flex: 2),
+                const LogoLoader(size: 108),
+                const SizedBox(height: 28),
+                const Text(
+                  '图库清道夫',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                '需要访问相册才能帮你清理',
-                style: TextStyle(color: AppColors.textSecondary, fontSize: 15),
-              ),
-              const SizedBox(height: 32),
-              ...const [
-                _Feature(
-                  icon: Icons.swipe_up_rounded,
-                  text: '上滑标记，左右切换，一张张快速过',
+                const SizedBox(height: 8),
+                const Text(
+                  '需要访问相册才能帮你清理',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 15,
+                  ),
                 ),
-                _Feature(icon: Icons.fact_check_rounded, text: '删除前统一确认，避免删错'),
-                _Feature(icon: Icons.lock_rounded, text: '全部在手机本地完成，不上传任何照片'),
-              ].indexed.map((e) => StaggerIn(index: e.$1 + 2, child: e.$2)),
-              const Spacer(flex: 3),
-              const AppButton(
-                expand: true,
-                icon: Icons.settings_rounded,
-                label: '去设置里开启',
-                onTap: PhotoManager.openSetting,
-              ),
-              TextButton(
-                onPressed: onRecheck,
-                child: const Text(
-                  '已开启，重新检查',
-                  style: TextStyle(color: AppColors.textSecondary),
+                const SizedBox(height: 32),
+                ...const [
+                  _Feature(
+                    icon: Icons.swipe_up_rounded,
+                    text: '上滑标记，左右切换，一张张快速过',
+                  ),
+                  _Feature(
+                    icon: Icons.fact_check_rounded,
+                    text: '删除前统一确认，避免删错',
+                  ),
+                  _Feature(icon: Icons.lock_rounded, text: '全部在手机本地完成，不上传任何照片'),
+                ].indexed.map((e) => StaggerIn(index: e.$1 + 2, child: e.$2)),
+                const Spacer(flex: 3),
+                const AppButton(
+                  expand: true,
+                  icon: Icons.settings_rounded,
+                  label: '去设置里开启',
+                  onTap: PhotoManager.openSetting,
                 ),
-              ),
-              const SizedBox(height: 8),
-            ],
+                TextButton(
+                  onPressed: onRecheck,
+                  child: const Text(
+                    '已开启，重新检查',
+                    style: TextStyle(color: AppColors.textSecondary),
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
           ),
         ),
       ),

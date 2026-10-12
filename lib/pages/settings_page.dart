@@ -134,208 +134,215 @@ class _SettingsPageState extends State<SettingsPage> {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _Section(
-            title: '浏览',
-            children: [
-              _Tile(
-                icon: Icons.swap_vert_rounded,
-                title: '排序方式',
-                value: '拍摄时间 · ${s.sortOrder.label}',
-                onTap: () => _pick(
-                  title: '排序方式',
-                  options: SortOrder.values,
-                  current: s.sortOrder,
-                  label: (o) => '按拍摄时间${o.label}',
-                  onPicked: s.setSortOrder,
-                ),
-              ),
-              _Tile(
-                icon: Icons.filter_list_rounded,
-                title: '显示内容',
-                value: s.mediaFilter.label,
-                onTap: () => _pick(
-                  title: '显示内容',
-                  options: MediaFilter.values,
-                  current: s.mediaFilter,
-                  label: (o) => o.label,
-                  onPicked: s.setMediaFilter,
-                ),
-              ),
-              _SwitchTile(
-                icon: Icons.info_outline_rounded,
-                title: '显示日期和大小',
-                value: s.showInfo,
-                onChanged: s.setShowInfo,
-              ),
-            ],
-          ),
-          _Section(
-            title: '视频与实况照片',
-            children: [
-              _SwitchTile(
-                icon: Icons.play_circle_outline_rounded,
-                title: '视频自动播放',
-                subtitle: '翻到视频时直接开始播放',
-                value: s.videoAutoPlay,
-                onChanged: s.setVideoAutoPlay,
-              ),
-              _Tile(
-                icon: Icons.motion_photos_on_outlined,
-                title: '实况照片',
-                value: s.livePlayMode.label,
-                onTap: () => _pick(
-                  title: '实况照片播放方式',
-                  options: LivePlayMode.values,
-                  current: s.livePlayMode,
-                  label: (o) => switch (o) {
-                    LivePlayMode.longPress => '长按照片播放',
-                    LivePlayMode.auto => '翻到时自动播放一次',
-                  },
-                  onPicked: s.setLivePlayMode,
-                ),
-              ),
-              _SwitchTile(
-                icon: Icons.volume_off_outlined,
-                title: '静音播放',
-                value: s.videoMuted,
-                onChanged: s.setVideoMuted,
-              ),
-            ],
-          ),
-          _Section(
-            title: '操作',
-            children: [
-              _SwitchTile(
-                icon: Icons.vibration_rounded,
-                title: '震动反馈',
-                value: s.haptics,
-                onChanged: s.setHaptics,
-              ),
-              _SwitchTile(
-                icon: Icons.verified_user_outlined,
-                title: '删除前确认',
-                subtitle: '关闭后仍会弹出系统的删除确认',
-                value: s.confirmBeforeDelete,
-                onChanged: s.setConfirmBeforeDelete,
-              ),
-            ],
-          ),
-          _Section(
-            title: '数据',
-            children: [
-              _Tile(
-                icon: Icons.layers_clear_outlined,
-                title: '清除所有标记',
-                value: cleaner.markedCount > 0
-                    ? '${cleaner.markedCount} 项'
-                    : null,
-                destructive: true,
-                onTap: cleaner.markedCount == 0
-                    ? null
-                    : () async {
-                        if (await _confirm(
-                          '清除所有标记？',
-                          '${cleaner.markedCount} 项待删除标记会被清除，照片本身不受影响。',
-                          '清除',
-                        )) {
-                          cleaner.clearAllMarks();
-                        }
-                      },
-              ),
-              _Tile(
-                icon: Icons.restart_alt_rounded,
-                title: '重置浏览进度',
-                destructive: true,
-                onTap: () async {
-                  if (await _confirm('重置浏览进度？', '所有相册都会回到第一张，标记不受影响。', '重置')) {
-                    await cleaner.resetProgress();
-                  }
-                },
-              ),
-            ],
-          ),
-          _Section(
-            title: '关于',
-            children: [
-              _Tile(
-                icon: Icons.language_rounded,
-                title: '产品官网',
-                external: true,
-                onTap: () => _open(AppLinks.website),
-              ),
-              _Tile(
-                icon: Icons.code_rounded,
-                title: 'GitHub',
-                external: true,
-                onTap: () => _open(AppLinks.github),
-              ),
-              _Tile(
-                icon: Icons.privacy_tip_outlined,
-                title: '隐私政策',
-                onTap: () => _push(const LegalPage.privacy()),
-              ),
-              _Tile(
-                icon: Icons.description_outlined,
-                title: '用户协议',
-                onTap: () => _push(const LegalPage.terms()),
-              ),
-              _Tile(
-                icon: Icons.school_outlined,
-                title: '使用引导',
-                onTap: () => _push(const OnboardingPage(replay: true)),
-              ),
-              _Tile(
-                icon: Icons.favorite_border_rounded,
-                title: '鸣谢',
-                onTap: () => _push(const AcknowledgementsPage()),
-              ),
-              _Tile(
-                icon: Icons.article_outlined,
-                title: '开源许可',
-                onTap: () => showLicensePage(
-                  context: context,
-                  applicationName: AppInfo.nameZh,
-                  applicationIcon: const Padding(
-                    padding: EdgeInsets.all(12),
-                    child: AppLogo(size: 64),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Center(
-            child: Column(
+      body: MaxWidth(
+        width: 680,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+          children: [
+            _Section(
+              title: '浏览',
               children: [
-                const AppLogo(size: 56),
-                const SizedBox(height: 10),
-                const Text(
-                  '${AppInfo.nameZh} · ${AppInfo.nameEn}',
-                  style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 13,
+                _Tile(
+                  icon: Icons.swap_vert_rounded,
+                  title: '排序方式',
+                  value: '拍摄时间 · ${s.sortOrder.label}',
+                  onTap: () => _pick(
+                    title: '排序方式',
+                    options: SortOrder.values,
+                    current: s.sortOrder,
+                    label: (o) => '按拍摄时间${o.label}',
+                    onPicked: s.setSortOrder,
                   ),
                 ),
-                const SizedBox(height: 4),
-                FutureBuilder<PackageInfo>(
-                  future: _info,
-                  builder: (context, snap) => Text(
-                    snap.hasData
-                        ? '版本 ${snap.data!.version} (${snap.data!.buildNumber})'
-                        : ' ',
-                    style: const TextStyle(
-                      color: AppColors.textTertiary,
-                      fontSize: 12,
+                _Tile(
+                  icon: Icons.filter_list_rounded,
+                  title: '显示内容',
+                  value: s.mediaFilter.label,
+                  onTap: () => _pick(
+                    title: '显示内容',
+                    options: MediaFilter.values,
+                    current: s.mediaFilter,
+                    label: (o) => o.label,
+                    onPicked: s.setMediaFilter,
+                  ),
+                ),
+                _SwitchTile(
+                  icon: Icons.info_outline_rounded,
+                  title: '显示日期和大小',
+                  value: s.showInfo,
+                  onChanged: s.setShowInfo,
+                ),
+              ],
+            ),
+            _Section(
+              title: '视频与实况照片',
+              children: [
+                _SwitchTile(
+                  icon: Icons.play_circle_outline_rounded,
+                  title: '视频自动播放',
+                  subtitle: '翻到视频时直接开始播放',
+                  value: s.videoAutoPlay,
+                  onChanged: s.setVideoAutoPlay,
+                ),
+                _Tile(
+                  icon: Icons.motion_photos_on_outlined,
+                  title: '实况照片',
+                  value: s.livePlayMode.label,
+                  onTap: () => _pick(
+                    title: '实况照片播放方式',
+                    options: LivePlayMode.values,
+                    current: s.livePlayMode,
+                    label: (o) => switch (o) {
+                      LivePlayMode.longPress => '长按照片播放',
+                      LivePlayMode.auto => '翻到时自动播放一次',
+                    },
+                    onPicked: s.setLivePlayMode,
+                  ),
+                ),
+                _SwitchTile(
+                  icon: Icons.volume_off_outlined,
+                  title: '静音播放',
+                  value: s.videoMuted,
+                  onChanged: s.setVideoMuted,
+                ),
+              ],
+            ),
+            _Section(
+              title: '操作',
+              children: [
+                _SwitchTile(
+                  icon: Icons.vibration_rounded,
+                  title: '震动反馈',
+                  value: s.haptics,
+                  onChanged: s.setHaptics,
+                ),
+                _SwitchTile(
+                  icon: Icons.verified_user_outlined,
+                  title: '删除前确认',
+                  subtitle: '关闭后仍会弹出系统的删除确认',
+                  value: s.confirmBeforeDelete,
+                  onChanged: s.setConfirmBeforeDelete,
+                ),
+              ],
+            ),
+            _Section(
+              title: '数据',
+              children: [
+                _Tile(
+                  icon: Icons.layers_clear_outlined,
+                  title: '清除所有标记',
+                  value: cleaner.markedCount > 0
+                      ? '${cleaner.markedCount} 项'
+                      : null,
+                  destructive: true,
+                  onTap: cleaner.markedCount == 0
+                      ? null
+                      : () async {
+                          if (await _confirm(
+                            '清除所有标记？',
+                            '${cleaner.markedCount} 项待删除标记会被清除，照片本身不受影响。',
+                            '清除',
+                          )) {
+                            cleaner.clearAllMarks();
+                          }
+                        },
+                ),
+                _Tile(
+                  icon: Icons.restart_alt_rounded,
+                  title: '重置浏览进度',
+                  destructive: true,
+                  onTap: () async {
+                    if (await _confirm(
+                      '重置浏览进度？',
+                      '所有相册都会回到第一张，标记不受影响。',
+                      '重置',
+                    )) {
+                      await cleaner.resetProgress();
+                    }
+                  },
+                ),
+              ],
+            ),
+            _Section(
+              title: '关于',
+              children: [
+                _Tile(
+                  icon: Icons.language_rounded,
+                  title: '产品官网',
+                  external: true,
+                  onTap: () => _open(AppLinks.website),
+                ),
+                _Tile(
+                  icon: Icons.code_rounded,
+                  title: 'GitHub',
+                  external: true,
+                  onTap: () => _open(AppLinks.github),
+                ),
+                _Tile(
+                  icon: Icons.privacy_tip_outlined,
+                  title: '隐私政策',
+                  onTap: () => _push(const LegalPage.privacy()),
+                ),
+                _Tile(
+                  icon: Icons.description_outlined,
+                  title: '用户协议',
+                  onTap: () => _push(const LegalPage.terms()),
+                ),
+                _Tile(
+                  icon: Icons.school_outlined,
+                  title: '使用引导',
+                  onTap: () => _push(const OnboardingPage(replay: true)),
+                ),
+                _Tile(
+                  icon: Icons.favorite_border_rounded,
+                  title: '鸣谢',
+                  onTap: () => _push(const AcknowledgementsPage()),
+                ),
+                _Tile(
+                  icon: Icons.article_outlined,
+                  title: '开源许可',
+                  onTap: () => showLicensePage(
+                    context: context,
+                    applicationName: AppInfo.nameZh,
+                    applicationIcon: const Padding(
+                      padding: EdgeInsets.all(12),
+                      child: AppLogo(size: 64),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            Center(
+              child: Column(
+                children: [
+                  const AppLogo(size: 56),
+                  const SizedBox(height: 10),
+                  const Text(
+                    '${AppInfo.nameZh} · ${AppInfo.nameEn}',
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 13,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  FutureBuilder<PackageInfo>(
+                    future: _info,
+                    builder: (context, snap) => Text(
+                      snap.hasData
+                          ? '版本 ${snap.data!.version} (${snap.data!.buildNumber})'
+                          : ' ',
+                      style: const TextStyle(
+                        color: AppColors.textTertiary,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

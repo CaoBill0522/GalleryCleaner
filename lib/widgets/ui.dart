@@ -3,6 +3,27 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+/// 限制内容最大宽度并居中，避免在 iPad 等大屏上拉得过宽。手机上不受影响。
+class MaxWidth extends StatelessWidget {
+  const MaxWidth({super.key, required this.child, this.width = 640});
+
+  final Widget child;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    // 只在水平方向居中；高度跟随内容，放在底栏等位置时不会被撑满。
+    return Align(
+      alignment: Alignment.topCenter,
+      heightFactor: 1,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: width),
+        child: child,
+      ),
+    );
+  }
+}
+
 /// 毛玻璃底板。
 class GlassPanel extends StatelessWidget {
   const GlassPanel({

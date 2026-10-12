@@ -81,47 +81,50 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: AnimatedOpacity(
-                opacity: _last ? 0 : 1,
-                duration: const Duration(milliseconds: 200),
-                child: TextButton(
-                  onPressed: _last ? null : _finish,
-                  child: const Text(
-                    '跳过',
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 16,
+        child: MaxWidth(
+          width: 520,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: AnimatedOpacity(
+                  opacity: _last ? 0 : 1,
+                  duration: const Duration(milliseconds: 200),
+                  child: TextButton(
+                    onPressed: _last ? null : _finish,
+                    child: const Text(
+                      '跳过',
+                      style: TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: PageView.builder(
-                controller: _pages,
-                itemCount: _steps.length,
-                onPageChanged: (i) {
-                  Haptics.selection();
-                  setState(() => _index = i);
-                },
-                itemBuilder: (context, i) => _StepView(step: _steps[i]),
+              Expanded(
+                child: PageView.builder(
+                  controller: _pages,
+                  itemCount: _steps.length,
+                  onPageChanged: (i) {
+                    Haptics.selection();
+                    setState(() => _index = i);
+                  },
+                  itemBuilder: (context, i) => _StepView(step: _steps[i]),
+                ),
               ),
-            ),
-            _Dots(count: _steps.length, index: _index),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(28, 24, 28, 16),
-              child: AppButton(
-                expand: true,
-                label: _last ? (widget.replay ? '知道了' : '开始使用') : '下一步',
-                icon: _last ? Icons.check_rounded : null,
-                onTap: _next,
+              _Dots(count: _steps.length, index: _index),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(28, 24, 28, 16),
+                child: AppButton(
+                  expand: true,
+                  label: _last ? (widget.replay ? '知道了' : '开始使用') : '下一步',
+                  icon: _last ? Icons.check_rounded : null,
+                  onTap: _next,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

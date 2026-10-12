@@ -45,100 +45,104 @@ class _DonePageState extends State<DonePage>
     final textIn = _interval(0.45, 0.8);
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28),
-          child: Column(
-            children: [
-              const Spacer(flex: 3),
-              SizedBox(
-                width: 220,
-                height: 220,
-                child: AnimatedBuilder(
-                  animation: _c,
-                  builder: (context, _) => CustomPaint(
-                    painter: _CheckPainter(
-                      ring: _interval(0, 0.4).value,
-                      check: _interval(0.3, 0.55).value,
-                      burst: _interval(0.45, 1, Curves.easeOut).value,
+        child: MaxWidth(
+          width: 520,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28),
+            child: Column(
+              children: [
+                const Spacer(flex: 3),
+                SizedBox(
+                  width: 220,
+                  height: 220,
+                  child: AnimatedBuilder(
+                    animation: _c,
+                    builder: (context, _) => CustomPaint(
+                      painter: _CheckPainter(
+                        ring: _interval(0, 0.4).value,
+                        check: _interval(0.3, 0.55).value,
+                        burst: _interval(0.45, 1, Curves.easeOut).value,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 28),
-              FadeTransition(
-                opacity: textIn,
-                child: SlideTransition(
-                  position: Tween(
-                    begin: const Offset(0, 0.3),
-                    end: Offset.zero,
-                  ).animate(textIn),
-                  child: Column(
-                    children: [
-                      const Text(
-                        '清理完成',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w800,
+                const SizedBox(height: 28),
+                FadeTransition(
+                  opacity: textIn,
+                  child: SlideTransition(
+                    position: Tween(
+                      begin: const Offset(0, 0.3),
+                      end: Offset.zero,
+                    ).animate(textIn),
+                    child: Column(
+                      children: [
+                        const Text(
+                          '清理完成',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _Stat(
-                              label: '删除',
-                              child: CountUp(
-                                value: widget.count,
-                                delay: const Duration(milliseconds: 700),
-                                builder: (_, v) => _bigNumber('$v', ' 项'),
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _Stat(
+                                label: '删除',
+                                child: CountUp(
+                                  value: widget.count,
+                                  delay: const Duration(milliseconds: 700),
+                                  builder: (_, v) => _bigNumber('$v', ' 项'),
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: _Stat(
-                              label: '释放空间',
-                              child: CountUp(
-                                value: widget.bytes,
-                                delay: const Duration(milliseconds: 700),
-                                builder: (_, v) {
-                                  final parts = formatBytes(v).split(' ');
-                                  return _bigNumber(parts[0], ' ${parts[1]}');
-                                },
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _Stat(
+                                label: '释放空间',
+                                child: CountUp(
+                                  value: widget.bytes,
+                                  delay: const Duration(milliseconds: 700),
+                                  builder: (_, v) {
+                                    final parts = formatBytes(v).split(' ');
+                                    return _bigNumber(parts[0], ' ${parts[1]}');
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        Platform.isIOS
-                            ? '在系统相册清空「最近删除」后空间才会真正释放'
-                            : '清空系统回收站后空间才会真正释放',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: AppColors.textTertiary,
-                          fontSize: 12,
+                          ],
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+                        Text(
+                          Platform.isIOS
+                              ? '在系统相册清空「最近删除」后空间才会真正释放'
+                              : '清空系统回收站后空间才会真正释放',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: AppColors.textTertiary,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const Spacer(flex: 4),
-              FadeTransition(
-                opacity: _interval(0.7, 1),
-                child: AppButton(
-                  expand: true,
-                  label: '继续清理',
-                  icon: Icons.auto_awesome_rounded,
-                  onTap: () =>
-                      Navigator.of(context).popUntil((route) => route.isFirst),
+                const Spacer(flex: 4),
+                FadeTransition(
+                  opacity: _interval(0.7, 1),
+                  child: AppButton(
+                    expand: true,
+                    label: '继续清理',
+                    icon: Icons.auto_awesome_rounded,
+                    onTap: () =>
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-            ],
+                const SizedBox(height: 12),
+              ],
+            ),
           ),
         ),
       ),

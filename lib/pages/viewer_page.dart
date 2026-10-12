@@ -674,67 +674,72 @@ class _BottomBar extends StatelessWidget {
         top: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GlassPanel(
-                radius: 32,
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  children: [
-                    Pressable(
-                      onTap: state.canUndo ? onUndo : null,
-                      child: Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white.withValues(alpha: 0.08),
-                        ),
-                        child: const Icon(
-                          Icons.undo_rounded,
-                          color: Colors.white,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GlassPanel(
+                  radius: 32,
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Pressable(
+                        onTap: state.canUndo ? onUndo : null,
+                        child: Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withValues(alpha: 0.08),
+                          ),
+                          child: const Icon(
+                            Icons.undo_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          BumpOnChange(
-                            value: count,
-                            child: Text(
-                              '$count',
-                              style: TextStyle(
-                                color: count > 0 ? AppColors.red : Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w800,
-                                height: 1.1,
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            BumpOnChange(
+                              value: count,
+                              child: Text(
+                                '$count',
+                                style: TextStyle(
+                                  color: count > 0
+                                      ? AppColors.red
+                                      : Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w800,
+                                  height: 1.1,
+                                ),
                               ),
                             ),
-                          ),
-                          const Text(
-                            '待删除',
-                            style: TextStyle(
-                              color: AppColors.textTertiary,
-                              fontSize: 11,
+                            const Text(
+                              '待删除',
+                              style: TextStyle(
+                                color: AppColors.textTertiary,
+                                fontSize: 11,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    AppButton(
-                      label: '完成',
-                      icon: Icons.check_rounded,
-                      height: 48,
-                      color: count > 0 ? AppColors.red : Colors.white,
-                      textColor: count > 0 ? Colors.white : Colors.black,
-                      onTap: onFinish,
-                    ),
-                  ],
+                      AppButton(
+                        label: '完成',
+                        icon: Icons.check_rounded,
+                        height: 48,
+                        color: count > 0 ? AppColors.red : Colors.white,
+                        textColor: count > 0 ? Colors.white : Colors.black,
+                        onTap: onFinish,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

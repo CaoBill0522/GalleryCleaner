@@ -174,69 +174,77 @@ class _ReviewPageState extends State<ReviewPage> {
                 style: TextStyle(color: AppColors.textSecondary),
               ),
             )
-          : CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: _SummaryCard(
-                    count: selected.length,
-                    bytes: bytes,
-                    sizesReady: sizesReady,
+          : MaxWidth(
+              width: 720,
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: _SummaryCard(
+                      count: selected.length,
+                      bytes: bytes,
+                      sizesReady: sizesReady,
+                    ),
                   ),
-                ),
-                const SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(20, 4, 20, 12),
-                    child: Text(
-                      '点照片看大图，点右上角圆圈可以保留这张',
-                      style: TextStyle(
-                        color: AppColors.textTertiary,
-                        fontSize: 12,
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20, 4, 20, 12),
+                      child: Text(
+                        '点照片看大图，点右上角圆圈可以保留这张',
+                        style: TextStyle(
+                          color: AppColors.textTertiary,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(14, 0, 14, 24),
-                  sliver: SliverGrid.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                        ),
-                    itemCount: assets.length,
-                    itemBuilder: (context, i) {
-                      final a = assets[i];
-                      return StaggerIn(
-                        index: i,
-                        child: _GridTile(
-                          asset: a,
-                          selected: state.isMarked(a.id),
-                          onTap: () => _openViewer(i),
-                          onToggle: () {
-                            Haptics.selection();
-                            state.setMarked(a.id, !state.isMarked(a.id));
-                          },
-                        ),
-                      );
-                    },
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(14, 0, 14, 24),
+                    sliver: SliverGrid.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8,
+                          ),
+                      itemCount: assets.length,
+                      itemBuilder: (context, i) {
+                        final a = assets[i];
+                        return StaggerIn(
+                          index: i,
+                          child: _GridTile(
+                            asset: a,
+                            selected: state.isMarked(a.id),
+                            onTap: () => _openViewer(i),
+                            onToggle: () {
+                              Haptics.selection();
+                              state.setMarked(a.id, !state.isMarked(a.id));
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
       bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
-          child: AppButton(
-            expand: true,
-            color: AppColors.red,
-            textColor: Colors.white,
-            icon: selected.isEmpty ? null : Icons.delete_rounded,
-            label: selected.isEmpty ? '没有选中要删除的照片' : '删除 ${selected.length} 项',
-            loading: _deleting,
-            onTap: selected.isEmpty
-                ? null
-                : () => _confirmDelete(selected, bytes),
+        child: MaxWidth(
+          width: 560,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
+            child: AppButton(
+              expand: true,
+              color: AppColors.red,
+              textColor: Colors.white,
+              icon: selected.isEmpty ? null : Icons.delete_rounded,
+              label: selected.isEmpty
+                  ? '没有选中要删除的照片'
+                  : '删除 ${selected.length} 项',
+              loading: _deleting,
+              onTap: selected.isEmpty
+                  ? null
+                  : () => _confirmDelete(selected, bytes),
+            ),
           ),
         ),
       ),
@@ -489,84 +497,87 @@ class _ConfirmDialog extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Material(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(28),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 64,
-                  height: 64,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.red,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
+          child: Material(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(28),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 64,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.red,
+                    ),
+                    child: const Icon(
+                      Icons.delete_rounded,
+                      color: Colors.white,
+                      size: 32,
+                    ),
                   ),
-                  child: const Icon(
-                    Icons.delete_rounded,
-                    color: Colors.white,
-                    size: 32,
+                  const SizedBox(height: 18),
+                  Text(
+                    '删除 $count 项？',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 18),
-                Text(
-                  '删除 $count 项？',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
+                  const SizedBox(height: 8),
+                  Text(
+                    '预计释放 ${formatBytes(bytes)}\n'
+                    '${Platform.isIOS ? '30 天内可在「最近删除」中恢复' : '可在系统回收站中恢复'}',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 14,
+                      height: 1.5,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '预计释放 ${formatBytes(bytes)}\n'
-                  '${Platform.isIOS ? '30 天内可在「最近删除」中恢复' : '可在系统回收站中恢复'}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 14,
-                    height: 1.5,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Pressable(
-                        onTap: () => Navigator.of(context).pop(false),
-                        child: Container(
-                          height: 50,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.08),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: const Text(
-                            '再看看',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Pressable(
+                          onTap: () => Navigator.of(context).pop(false),
+                          child: Container(
+                            height: 50,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.08),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: const Text(
+                              '再看看',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: AppButton(
-                        label: '删除',
-                        height: 50,
-                        color: AppColors.red,
-                        textColor: Colors.white,
-                        onTap: () => Navigator.of(context).pop(true),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: AppButton(
+                          label: '删除',
+                          height: 50,
+                          color: AppColors.red,
+                          textColor: Colors.white,
+                          onTap: () => Navigator.of(context).pop(true),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -646,53 +657,56 @@ class _ReviewViewerState extends State<_ReviewViewer> {
         ),
       ),
       bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 220),
-            child: marked
-                ? Pressable(
-                    key: const ValueKey('keep'),
-                    onTap: () {
-                      Haptics.light();
-                      state.setMarked(asset.id, false);
-                    },
-                    child: Container(
-                      height: 52,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.restore_rounded, color: Colors.white),
-                          SizedBox(width: 6),
-                          Text(
-                            '保留这张（取消删除）',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+        child: MaxWidth(
+          width: 560,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 220),
+              child: marked
+                  ? Pressable(
+                      key: const ValueKey('keep'),
+                      onTap: () {
+                        Haptics.light();
+                        state.setMarked(asset.id, false);
+                      },
+                      child: Container(
+                        height: 52,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(26),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.restore_rounded, color: Colors.white),
+                            SizedBox(width: 6),
+                            Text(
+                              '保留这张（取消删除）',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                    )
+                  : AppButton(
+                      key: const ValueKey('mark'),
+                      expand: true,
+                      color: AppColors.red,
+                      textColor: Colors.white,
+                      icon: Icons.delete_rounded,
+                      label: '重新标记删除',
+                      onTap: () {
+                        Haptics.medium();
+                        state.setMarked(asset.id, true);
+                      },
                     ),
-                  )
-                : AppButton(
-                    key: const ValueKey('mark'),
-                    expand: true,
-                    color: AppColors.red,
-                    textColor: Colors.white,
-                    icon: Icons.delete_rounded,
-                    label: '重新标记删除',
-                    onTap: () {
-                      Haptics.medium();
-                      state.setMarked(asset.id, true);
-                    },
-                  ),
+            ),
           ),
         ),
       ),
